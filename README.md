@@ -53,6 +53,9 @@
 
   <!-- Random Number Buttons -->
   <div class="mt-4">
+    <button id="roll1to6Btn" class="btn btn-primary mr-3">1 ~ 6 숫자 출력</button>
+    <span id="roll1to9Result">결과: </span>
+    <br><br>
     <button id="roll1to9Btn" class="btn btn-primary mr-3">1 ~ 10 숫자 출력</button>
     <span id="roll1to9Result">결과: </span>
     <br><br>
@@ -284,7 +287,6 @@
         </tbody>
       </table>
     </div>
-  </div>
     <div class="stat">
       <label>흑섬성공확률:</label>
       <div class="btn-group">
@@ -314,7 +316,6 @@
         </tbody>
       </table>
     </div>
-  </div>
     <div class="stat">
       <label>영역:</label>
       <div class="btn-group">
@@ -344,10 +345,14 @@
         </tbody>
       </table>
     </div>
-  </div>
   <!-- JavaScript -->
   <script>
     // 주사위 버튼 이벤트
+    document.getElementById('roll1to6Btn').addEventListener('click', function() {
+      const result = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('roll1to9Result').textContent = "결과: " + result;
+    });
+
     document.getElementById('roll1to9Btn').addEventListener('click', function() {
       const result = Math.floor(Math.random() * 10) + 1;
       document.getElementById('roll1to9Result').textContent = "결과: " + result;
