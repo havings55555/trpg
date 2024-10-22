@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -38,10 +38,6 @@
     .btn-group {
       margin-right: 10px;
     }
-    /* Hide additional stats by default */
-    #additionalStats {
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -51,11 +47,17 @@
     <a class="navbar-brand" href="#">TRPG용 서버</a>
   </nav>
 
+  <div class="mb-4">
+    <label for="playerName">이름 입력:</label>
+    <input type="text" id="playerName" class="form-control" placeholder="이름을 입력하세요">
+    <button class="btn btn-primary mt-2" onclick="displayPlayerName()">확인</button>
+  </div>
+
+  <!-- 플레이어 이름 표시 -->
+  <h2 id="displayedPlayerName" class="mt-4"></h2>
+
   <!-- Random Number Buttons -->
   <div class="mt-4">
-    <button id="roll1to6Btn" class="btn btn-primary mr-3">1 ~ 6 숫자 출력</button>
-    <span id="roll1to9Result">결과: </span>
-    <br><br>
     <button id="roll1to9Btn" class="btn btn-primary mr-3">1 ~ 10 숫자 출력</button>
     <span id="roll1to9Result">결과: </span>
     <br><br>
@@ -68,291 +70,317 @@
 
   <!-- 메인 스탯 -->
   <h3 class="mt-5">메인 스탯</h3>
-  <div class="mt-4">
-    <!-- 힘 -->
-    <div class="stat">
-      <label>힘:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', -1)">-1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', 1)">+1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', 5)">+5</button> <!-- 추가 -->
+
+  <div class="container">
+    <div class="row">
+      <!-- 힘 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>힘:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', 5)">+5</button>
+          </div>
+          <span id="strValue">0</span>
+          <div class="progress mt-2">
+            <div id="strBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+          </div>
+          <table id="strTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="strEasy">0</td>
+                <td id="strNormal">0</td>
+                <td id="strHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <span id="strValue">0</span>
-      <div class="progress mt-2">
-        <div id="strBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+
+      <!-- 체력 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>체력:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 5)">+5</button>
+          </div>
+          <span id="hpValue">0</span>
+          <div class="progress mt-2">
+            <div id="hpBar" class="progress-bar" style="width: 0%; background-color: green;"></div>
+          </div>
+          <table id="hpTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="hpEasy">0</td>
+                <td id="hpNormal">0</td>
+                <td id="hpHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <!-- Difficulty Table -->
-      <table id="strTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="strEasy">0</td>
-            <td id="strNormal">0</td>
-            <td id="strHard">0</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- 속도 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>속도:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 5)">+5</button>
+          </div>
+          <span id="speedValue">0</span>
+          <div class="progress mt-2">
+            <div id="speedBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
+          </div>
+          <table id="speedTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="speedEasy">0</td>
+                <td id="speedNormal">0</td>
+                <td id="speedHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <!-- 체력 -->
-    <div class="stat">
-      <label>체력:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -1)">-1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 1)">+1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 5)">+5</button> <!-- 추가 -->
+    <!-- 행운, 지능, 주력 -->
+    <div class="row">
+      <!-- 행운 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>행운:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', 5)">+5</button>
+          </div>
+          <span id="luckValue">0</span>
+          <div class="progress mt-2">
+            <div id="luckBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+          </div>
+          <table id="luckTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="luckEasy">0</td>
+                <td id="luckNormal">0</td>
+                <td id="luckHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <span id="hpValue">0</span>
-      <div class="progress mt-2">
-        <div id="hpBar" class="progress-bar" style="width: 0%; background-color: green;"></div>
+
+      <!-- 지능 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>지능:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', 5)">+5</button>
+          </div>
+          <span id="intelligenceValue">0</span>
+          <div class="progress mt-2">
+            <div id="intelligenceBar" class="progress-bar" style="width: 0%; background-color: lightgreen;"></div>
+          </div>
+          <table id="intelligenceTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="intelligenceEasy">0</td>
+                <td id="intelligenceNormal">0</td>
+                <td id="intelligenceHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <table id="hpTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="hpEasy">0</td>
-            <td id="hpNormal">0</td>
-            <td id="hpHard">0</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- 주력 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>주력:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 5)">+5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -10)">-10</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 10)">+10</button>
+          </div>
+          <span id="agiValue">0</span>
+          <div class="progress mt-2">
+            <div id="agiBar" class="progress-bar" style="width: 0%; background-color: orange;"></div>
+          </div>
+          <table id="agiTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="agiEasy">0</td>
+                <td id="agiNormal">0</td>
+                <td id="agiHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <!-- 속도 -->
-    <div class="stat">
-      <label>속도:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -1)">-1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 1)">+1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 5)">+5</button> <!-- 추가 -->
+    <h3 class="mt-5">추가 스탯</h3>
+    <div class="row">
+      <!-- 아이디어 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>아이디어:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', 5)">+5</button>
+          </div>
+          <span id="ideaValue">0</span>
+          <div class="progress mt-2">
+            <div id="ideaBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+          </div>
+          <table id="ideaTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="ideaEasy">0</td>
+                <td id="ideaNormal">0</td>
+                <td id="ideaHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <span id="speedValue">0</span>
-      <div class="progress mt-2">
-        <div id="speedBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
-      </div>
-      <table id="speedTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="speedEasy">0</td>
-            <td id="speedNormal">0</td>
-            <td id="speedHard">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
-    <!-- 행운 -->
-    <div class="stat">
-      <label>행운:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', -1)">-1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', 1)">+1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', 5)">+5</button> <!-- 추가 -->
+      <!-- 흑섬성공확률 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>흑섬성공확률:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button>
+          </div>
+          <span id="blacksparkValue">0</span>
+          <div class="progress mt-2">
+            <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+          </div>
+          <table id="blacksparkTable">
+            <thead>
+              <tr>
+                <th>어려움</th>
+                <th>매우어려움</th>
+                <th>극한</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="blacksparkHard">0</td>
+                <td id="blacksparkVeryHard">0</td>
+                <td id="blacksparkSveryHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <span id="luckValue">0</span>
-      <div class="progress mt-2">
-        <div id="luckBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
-      </div>
-      <table id="luckTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="luckEasy">0</td>
-            <td id="luckNormal">0</td>
-            <td id="luckHard">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
-    <!-- 지능 (메인 스탯) -->
-    <div class="stat">
-      <label>지능:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', -1)">-1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', 1)">+1</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', 5)">+5</button> <!-- 추가 -->
+      <!-- 영역 -->
+      <div class="col-md-4">
+        <div class="stat">
+          <label>영역:</label>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 5)">+5</button>
+          </div>
+          <span id="domainValue">0</span>
+          <div class="progress mt-2">
+            <div id="domainBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+          </div>
+          <table id="domainTable">
+            <thead>
+              <tr>
+                <th>쉬움</th>
+                <th>보통</th>
+                <th>어려움</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="domainEasy">0</td>
+                <td id="domainNormal">0</td>
+                <td id="domainHard">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <span id="intelligenceValue">0</span>
-      <div class="progress mt-2">
-        <div id="intelligenceBar" class="progress-bar" style="width: 0%; background-color: lightgreen;"></div>
-      </div>
-      <table id="intelligenceTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="intelligenceEasy">0</td>
-            <td id="intelligenceNormal">0</td>
-            <td id="intelligenceHard">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 주력 (Max 200) -->
-    <div class="stat">
-      <label>주력:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -5)">-5</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 5)">+5</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -10)">-10</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 10)">+10</button> <!-- 추가 -->
-      </div>
-      <span id="agiValue">0</span>
-      <div class="progress mt-2">
-        <div id="agiBar" class="progress-bar" style="width: 0%; background-color: orange;"></div>
-      </div>
-      <table id="agiTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="agiEasy">0</td>
-            <td id="agiNormal">0</td>
-            <td id="agiHard">0</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
-  <h3 class="mt-5">추가 스탯</h3>
-    <!-- 아이디어 (추가 스탯) -->
-    <div class="stat">
-      <label>아이디어:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', -1)">-1</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', 1)">+1</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', 5)">+5</button> <!-- 추가 -->
-      </div>
-      <span id="ideaValue">0</span>
-      <div class="progress mt-2">
-        <div id="ideaBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
-      </div>
-      <table id="ideaTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="ideaEasy">0</td>
-            <td id="ideaNormal">0</td>
-            <td id="ideaHard">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="stat">
-      <label>흑섬성공확률:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button> <!-- 추가 -->
-      </div>
-      <span id="blacksparkValue">0</span>
-      <div class="progress mt-2">
-        <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
-      </div>
-      <table id="blacksparkTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="blacksparkHard">0</td>
-            <td id="blacksparkVeryhard">0</td>
-            <td id="blacksparkSvhard">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="stat">
-      <label>영역:</label>
-      <div class="btn-group">
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -1)">-1</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 1)">+1</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -5)">-5</button> <!-- 추가 -->
-        <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 5)">+5</button> <!-- 추가 -->
-      </div>
-      <span id="domainValue">0</span>
-      <div class="progress mt-2">
-        <div id="domainBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
-      </div>
-      <table id="domainTable">
-        <thead>
-          <tr>
-            <th>쉬움</th>
-            <th>보통</th>
-            <th>어려움</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="domainEasy">0</td>
-            <td id="domainNormal">0</td>
-            <td id="domainHard">0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
   <!-- JavaScript -->
   <script>
     // 주사위 버튼 이벤트
-    document.getElementById('roll1to6Btn').addEventListener('click', function() {
-      const result = Math.floor(Math.random() * 6) + 1;
-      document.getElementById('roll1to9Result').textContent = "결과: " + result;
-    });
-
     document.getElementById('roll1to9Btn').addEventListener('click', function() {
       const result = Math.floor(Math.random() * 10) + 1;
       document.getElementById('roll1to9Result').textContent = "결과: " + result;
@@ -393,20 +421,26 @@
       progressBar.style.width = (newValue / maxValues[stat]) * 100 + '%';
 
       // Update difficulty table
-      const easyValue = Math.round(newValue * 5);
-      const normalValue = Math.round(newValue * 2.5);
-      const hardValue = newValue;
-      const veryhardValue = Math.round(newValue / 2.5);
-      const svhardValue = Math.round(newValue / 5);
+      if (stat === 'blackspark') {
+        const hardValue = newValue;
+        const veryhardValue = Math.round(newValue / 2.5);
+        const sveryhardValue = Math.round(newValue / 5);
 
-      document.getElementById(stat + 'Easy').textContent = easyValue;
-      document.getElementById(stat + 'Normal').textContent = normalValue;
-      document.getElementById(stat + 'Hard').textContent = hardValue;
-      document.getElementById(stat + 'VeryHard').textContent = veryhardValue;
-      document.getElementById(stat + 'SveryHard').textContent = sveryhardValue;
+        document.getElementById(stat + 'Hard').textContent = hardValue;
+        document.getElementById(stat + 'VeryHard').textContent = veryhardValue;
+        document.getElementById(stat + 'SveryHard').textContent = sveryhardValue;
+      }
+      else {
+          // 일반 스탯에 대한 쉬움, 보통, 어려움 계산
+          const easyValue = Math.round(newValue * 5);
+          const normalValue = Math.round(newValue * 2.5);
+          const hardValue = newValue;
+
+          document.getElementById(stat + 'Easy').textContent = easyValue;
+          document.getElementById(stat + 'Normal').textContent = normalValue;
+          document.getElementById(stat + 'Hard').textContent = hardValue;
+      }
     }
-
-    
   </script>
 
   <!-- Bootstrap JS and dependencies -->
