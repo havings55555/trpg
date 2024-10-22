@@ -349,7 +349,7 @@
       <!-- 영역 -->
       <div class="col-md-4">
         <div class="stat">
-          <label>영역:</label>
+          <label>재능:</label>
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 1)">+1</button>
