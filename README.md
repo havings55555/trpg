@@ -378,9 +378,108 @@
           </table>
         </div>
       </div>
-    </div>
-  </div>
-
+      <div class="container mt-4">
+        <div class="row">
+          <!-- 주력 운용 능력 -->
+          <div class="col-md-4">
+            <div class="stat">
+              <label>주력 운용 능력:</label>
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', -1)">-1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', 1)">+1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', -5)">-5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', 5)">+5</button>
+              </div>
+              <span id="controlValue">0</span>
+              <div class="progress mt-2">
+                <div id="controlBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+              </div>
+              <table id="controlTable">
+                <thead>
+                  <tr>
+                    <th>쉬움</th>
+                    <th>보통</th>
+                    <th>어려움</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="controlEasy">0</td>
+                    <td id="controlNormal">0</td>
+                    <td id="controlHard">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    
+          <!-- 반사신경 -->
+          <div class="col-md-4">
+            <div class="stat">
+              <label>반사신경:</label>
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', -1)">-1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', 1)">+1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', -5)">-5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', 5)">+5</button>
+              </div>
+              <span id="feelValue">0</span>
+              <div class="progress mt-2">
+                <div id="feelBar" class="progress-bar" style="width: 0%; background-color: lightgreen;"></div>
+              </div>
+              <table id="feelTable">
+                <thead>
+                  <tr>
+                    <th>쉬움</th>
+                    <th>보통</th>
+                    <th>어려움</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="feelEasy">0</td>
+                    <td id="feelNormal">0</td>
+                    <td id="feelHard">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    
+          <!-- 주력이해도 -->
+          <div class="col-md-4">
+            <div class="stat">
+              <label>주력이해도:</label>
+              <div class="btn-group">
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', -1)">-1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', 1)">+1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', -5)">-5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', 5)">+5</button>
+              </div>
+              <span id="understandValue">0</span>
+              <div class="progress mt-2">
+                <div id="understandBar" class="progress-bar" style="width: 0%; background-color: orange;"></div>
+              </div>
+              <table id="understandTable">
+                <thead>
+                  <tr>
+                    <th>쉬움</th>
+                    <th>보통</th>
+                    <th>어려움</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="understandEasy">0</td>
+                    <td id="understandNormal">0</td>
+                    <td id="understandHard">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
   <!-- JavaScript -->
   <script>
     // 주사위 버튼 이벤트
@@ -414,7 +513,10 @@
       extraAgi: 100,
       idea: 20,
       blackspark: 20,
-      domain: 20
+      domain: 20,
+      control:20,
+      feel:20,
+      understand:20
     };
 
     function adjustStat(stat, amount) {
