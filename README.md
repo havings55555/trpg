@@ -309,9 +309,9 @@
         </thead>
         <tbody>
           <tr>
-            <td id="blacksparkEasy">0</td>
-            <td id="blacksparkNormal">0</td>
             <td id="blacksparkHard">0</td>
+            <td id="blacksparkVeryhard">0</td>
+            <td id="blacksparkSvhard">0</td>
           </tr>
         </tbody>
       </table>
@@ -396,10 +396,14 @@
       const easyValue = Math.round(newValue * 5);
       const normalValue = Math.round(newValue * 2.5);
       const hardValue = newValue;
+      const veryhardValue = Math.round(newValue / 2.5);
+      const svhardValue = Math.round(newValue / 5);
 
       document.getElementById(stat + 'Easy').textContent = easyValue;
       document.getElementById(stat + 'Normal').textContent = normalValue;
       document.getElementById(stat + 'Hard').textContent = hardValue;
+      document.getElementById(stat + 'VeryHard').textContent = veryhardValue;
+      document.getElementById(stat + 'SveryHard').textContent = sveryhardValue;
     }
 
     
