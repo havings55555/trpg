@@ -58,8 +58,11 @@
 
   <!-- Random Number Buttons -->
   <div class="mt-4">
+    <button id="roll1to9Btn" class="btn btn-primary mr-3">1 ~ 6 숫자 출력</button>
+    <span id="roll1to6Result">결과: </span>
+    <br><br>
     <button id="roll1to9Btn" class="btn btn-primary mr-3">1 ~ 10 숫자 출력</button>
-    <span id="roll1to9Result">결과: </span>
+    <span id="roll1to10Result">결과: </span>
     <br><br>
     <button id="roll1to20Btn" class="btn btn-primary mr-3">1 ~ 20 숫자 출력</button>
     <span id="roll1to20Result">결과: </span>
@@ -381,9 +384,14 @@
   <!-- JavaScript -->
   <script>
     // 주사위 버튼 이벤트
-    document.getElementById('roll1to9Btn').addEventListener('click', function() {
+      document.getElementById('roll1to6Btn').addEventListener('click', function() {
+      const result = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('roll1to6Result').textContent = "결과: " + result;
+    });
+    
+      document.getElementById('roll1to10Btn').addEventListener('click', function() {
       const result = Math.floor(Math.random() * 10) + 1;
-      document.getElementById('roll1to9Result').textContent = "결과: " + result;
+      document.getElementById('roll1to10Result').textContent = "결과: " + result;
     });
 
     document.getElementById('roll1to20Btn').addEventListener('click', function() {
