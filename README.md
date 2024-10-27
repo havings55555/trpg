@@ -91,6 +91,7 @@
             <div id="strBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
           </div>
         </div>
+      </div>
       <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
