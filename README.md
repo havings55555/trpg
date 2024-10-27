@@ -106,22 +106,6 @@
           <div class="progress mt-2">
             <div id="hpBar" class="progress-bar" style="width: 0%; background-color: green;"></div>
           </div>
-          <table id="hpTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="hpEasy">0</td>
-                <td id="hpNormal">0</td>
-                <td id="hpHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
 
@@ -139,25 +123,8 @@
           <div class="progress mt-2">
             <div id="speedBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
           </div>
-          <table id="speedTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="speedEasy">0</td>
-                <td id="speedNormal">0</td>
-                <td id="speedHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
-    </div>
 
     <!-- 행운, 지능, 주력 -->
     <div class="row">
@@ -175,22 +142,6 @@
           <div class="progress mt-2">
             <div id="luckBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
           </div>
-          <table id="luckTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="luckEasy">0</td>
-                <td id="luckNormal">0</td>
-                <td id="luckHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
 
@@ -208,22 +159,6 @@
           <div class="progress mt-2">
             <div id="intelligenceBar" class="progress-bar" style="width: 0%; background-color: lightgreen;"></div>
           </div>
-          <table id="intelligenceTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="intelligenceEasy">0</td>
-                <td id="intelligenceNormal">0</td>
-                <td id="intelligenceHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
 
@@ -241,25 +176,8 @@
           <div class="progress mt-2">
             <div id="agiBar" class="progress-bar" style="width: 0%; background-color: orange;"></div>
           </div>
-          <table id="agiTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="agiEasy">0</td>
-                <td id="agiNormal">0</td>
-                <td id="agiHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
-    </div>
 
     <h3 class="mt-5">추가 스탯</h3>
     <div class="row">
@@ -310,93 +228,9 @@
           <div class="progress mt-2">
             <div id="domainBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
           </div>
-          <table id="domainTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="domainEasy">0</td>
-                <td id="domainNormal">0</td>
-                <td id="domainHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
-      <div class="container mt-4">
-        <div class="row">
-          <!-- 주력 운용 능력 -->
-          <div class="col-md-4">
-            <div class="stat">
-              <label>주력 운용 능력:</label>
-              <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('control', 5)">+5</button>
-              </div>
-              <span id="controlValue">0</span>
-              <div class="progress mt-2">
-                <div id="controlBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
-              </div>
-              <table id="controlTable">
-                <thead>
-                  <tr>
-                    <th>쉬움</th>
-                    <th>보통</th>
-                    <th>어려움</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td id="controlEasy">0</td>
-                    <td id="controlNormal">0</td>
-                    <td id="controlHard">0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-    
-          <!-- 주력이해도 -->
-          <div class="col-md-4">
-            <div class="stat">
-              <label>주력이해도:</label>
-              <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('understand', 5)">+5</button>
-              </div>
-              <span id="understandValue">0</span>
-              <div class="progress mt-2">
-                <div id="understandBar" class="progress-bar" style="width: 0%; background-color: orange;"></div>
-              </div>
-              <table id="understandTable">
-                <thead>
-                  <tr>
-                    <th>쉬움</th>
-                    <th>보통</th>
-                    <th>어려움</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td id="understandEasy">0</td>
-                    <td id="understandNormal">0</td>
-                    <td id="understandHard">0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      
   <!-- JavaScript -->
   <script>
     // 주사위 버튼 이벤트
