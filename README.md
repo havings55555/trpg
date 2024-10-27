@@ -90,25 +90,7 @@
           <div class="progress mt-2">
             <div id="strBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
           </div>
-          <table id="strTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="strEasy">0</td>
-                <td id="strNormal">0</td>
-                <td id="strHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-      </div>
-
       <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
