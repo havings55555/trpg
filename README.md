@@ -79,7 +79,7 @@
       <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
-          <label>힘:</label>
+          <label>체력:</label>
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', 1)">+1</button>
