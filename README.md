@@ -76,7 +76,7 @@
 
   <div class="container">
     <div class="row">
-      <!-- 힘 -->
+      <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
           <label>힘:</label>
@@ -112,7 +112,7 @@
       <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
-          <label>체력:</label>
+          <label>힘:</label>
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 1)">+1</button>
@@ -249,10 +249,10 @@
         <div class="stat">
           <label>주력:</label>
           <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 1)">+1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -5)">-5</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 5)">+5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -10)">-10</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 10)">+10</button>
           </div>
           <span id="agiValue">0</span>
           <div class="progress mt-2">
@@ -509,7 +509,7 @@
       speed: 20,
       luck: 20,
       intelligence: 20,
-      agi: 200,
+      agi: 20,
       extraAgi: 100,
       idea: 20,
       blackspark: 20,
