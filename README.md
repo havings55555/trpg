@@ -280,39 +280,6 @@
 
     <h3 class="mt-5">추가 스탯</h3>
     <div class="row">
-      <!-- 아이디어 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label>아이디어:</label>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('idea', 5)">+5</button>
-          </div>
-          <span id="ideaValue">0</span>
-          <div class="progress mt-2">
-            <div id="ideaBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
-          </div>
-          <table id="ideaTable">
-            <thead>
-              <tr>
-                <th>쉬움</th>
-                <th>보통</th>
-                <th>어려움</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="ideaEasy">0</td>
-                <td id="ideaNormal">0</td>
-                <td id="ideaHard">0</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
       <!-- 흑섬성공확률 -->
       <div class="col-md-4">
         <div class="stat">
@@ -346,7 +313,7 @@
         </div>
       </div>
 
-      <!-- 영역 -->
+      <!-- 재능 -->
       <div class="col-md-4">
         <div class="stat">
           <label>재능:</label>
@@ -407,39 +374,6 @@
                     <td id="controlEasy">0</td>
                     <td id="controlNormal">0</td>
                     <td id="controlHard">0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-    
-          <!-- 반사신경 -->
-          <div class="col-md-4">
-            <div class="stat">
-              <label>반사신경:</label>
-              <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('feel', 5)">+5</button>
-              </div>
-              <span id="feelValue">0</span>
-              <div class="progress mt-2">
-                <div id="feelBar" class="progress-bar" style="width: 0%; background-color: lightgreen;"></div>
-              </div>
-              <table id="feelTable">
-                <thead>
-                  <tr>
-                    <th>쉬움</th>
-                    <th>보통</th>
-                    <th>어려움</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td id="feelEasy">0</td>
-                    <td id="feelNormal">0</td>
-                    <td id="feelHard">0</td>
                   </tr>
                 </tbody>
               </table>
