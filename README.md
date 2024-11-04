@@ -115,7 +115,7 @@
       <!-- 둘째 줄: 재능, 매력 -->
       <div class="row mt-4">
         <!-- 재능 -->
-        <div class="col-md-4">
+        <div class="col-md-4">curse
           <div class="stat">
             <label>재능 (최대값 설정):</label>
             <input type="number" class="form-control mb-2" id="talentMax" value="20" oninput="updateMaxValue('talent', this.value)">
@@ -148,6 +148,22 @@
               <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
             </div>
           </div>
+      <div class="col-md-4">curse
+          <div class="stat">
+            <label>재능 (최대값 설정):</label>
+            <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('talent', this.value)">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 5)">+5</button>
+            </div>
+            <span id="curseValue">0</span>
+            <div class="progress mt-2">
+              <div id="curseBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+            </div>
+          </div>
+        </div>
     <!-- 메인 스탯 사이의 입력 공간 -->
     <div class="mt-4">
         <label for="mainStatNote">스킬칸:</label>
@@ -228,6 +244,7 @@
         speed: 20,
         talent: 20,
         charm: 20,
+        curse:20,
         attack: 20,
         defense: 20,
         blackspark: 20
