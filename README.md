@@ -115,7 +115,7 @@
       <!-- 둘째 줄: 재능, 매력 -->
       <div class="row mt-4">
         <!-- 재능 -->
-        <div class="col-md-4">curse
+        <div class="col-md-4">
           <div class="stat">
             <label>재능 (최대값 설정):</label>
             <input type="number" class="form-control mb-2" id="talentMax" value="20" oninput="updateMaxValue('talent', this.value)">
