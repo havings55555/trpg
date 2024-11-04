@@ -160,7 +160,7 @@
             </div>
             <span id="curseValue">0</span>
             <div class="progress mt-2">
-              <div id="curseBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+              <div id="curseBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
             </div>
           </div>
         </div>
