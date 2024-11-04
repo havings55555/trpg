@@ -148,9 +148,6 @@
               <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
     <!-- 메인 스탯 사이의 입력 공간 -->
     <div class="mt-4">
         <label for="mainStatNote">스킬칸:</label>
@@ -192,9 +189,21 @@
               <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: darkblue;"></div>
             </div>
           </div>
+        <div class="col-md-4">
+          <div class="stat">
+            <label>흑섬성공확률:</label>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button>
+            </div>
+            <span id="blacksparkValue">0</span>
+            <div class="progress mt-2">
+              <div id="blacksparkkBar" class="progress-bar" style="width: 0%; background-color: black;"></div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
   
     <!-- JavaScript -->
     <script>
@@ -211,7 +220,8 @@
         talent: 20,
         charm: 20,
         attack: 20,
-        defense: 20
+        defense: 20,
+        blackspark: 20
       };
   
       function updateMaxValue(stat, max) {
