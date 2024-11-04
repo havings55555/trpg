@@ -189,6 +189,7 @@
               <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: darkblue;"></div>
             </div>
           </div>
+        </div>
         <div class="col-md-4">
           <div class="stat">
             <label>흑섬성공확률:</label>
