@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRPG용 서버</title>
+  <title>TRPG 서버</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -11,29 +11,12 @@
       font-family: Arial, sans-serif;
       padding: 20px;
     }
-    /* Stat bars */
     .stat {
       margin-bottom: 20px;
     }
     .progress {
-      height: 30px; /* Set bar height to 30px */
+      height: 30px;
       width: 200px;
-    }
-    /* Table styles */
-    table {
-      margin-top: 10px;
-      border-collapse: collapse;
-      width: 200px;
-      font-size: 12px;
-    }
-    table, th, td {
-      border: 1px solid black;
-    }
-    th, td {
-      padding: 8px;
-      text-align: center;
-      width: 200px;
-      height: 30px; /* Set table cell height to 30px */
     }
     .btn-group {
       margin-right: 10px;
@@ -42,19 +25,16 @@
 </head>
 <body>
 
-  <!-- Navbar using Bootstrap -->
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">TRPG용 서버</a>
-  </nav>
-
+  <!-- 사이트 제목 변경 -->
   <div class="mb-4">
-    <label for="playerName">이름 입력:</label>
-    <input type="text" id="playerName" class="form-control" placeholder="이름을 입력하세요">
-    <button class="btn btn-primary mt-2" onclick="displayPlayerName()">확인</button>
+    <label for="siteTitle">사이트 제목 변경:</label>
+    <input type="text" id="siteTitle" class="form-control" placeholder="사이트 제목을 입력하세요" oninput="updateTitle()">
   </div>
 
-  <!-- 플레이어 이름 표시 -->
-  <h2 id="displayedPlayerName" class="mt-4"></h2>
+  <!-- Navbar using Bootstrap -->
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" id="navbarTitle">TRPG 서버</a>
+  </nav>
 
   <!-- Random Number Buttons -->
   <div class="mt-4">
@@ -71,15 +51,16 @@
     <span id="roll1to100Result">결과: </span>
   </div>
 
-  <!-- 메인 스탯 -->
+  <!-- 메인 스탯 입력 공간 -->
   <h3 class="mt-5">메인 스탯</h3>
-
   <div class="container">
+    <!-- 첫 줄: 힘, 체력, 속도 -->
     <div class="row">
-      <!-- 체력 -->
+      <!-- 힘 -->
       <div class="col-md-4">
         <div class="stat">
-          <label>체력:</label>
+          <label>힘 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="strMax" value="20" oninput="updateMaxValue('str', this.value)">
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('str', 1)">+1</button>
@@ -88,14 +69,16 @@
           </div>
           <span id="strValue">0</span>
           <div class="progress mt-2">
-            <div id="strBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+            <div id="strBar" class="progress-bar" style="width: 0%; background-color: yellow;"></div>
           </div>
         </div>
       </div>
+
       <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
-          <label>힘:</label>
+          <label>체력 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="hpMax" value="20" oninput="updateMaxValue('hp', this.value)">
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 1)">+1</button>
@@ -104,7 +87,7 @@
           </div>
           <span id="hpValue">0</span>
           <div class="progress mt-2">
-            <div id="hpBar" class="progress-bar" style="width: 0%; background-color: green;"></div>
+            <div id="hpBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
           </div>
         </div>
       </div>
@@ -112,7 +95,8 @@
       <!-- 속도 -->
       <div class="col-md-4">
         <div class="stat">
-          <label>속도:</label>
+          <label>속도 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="speedMax" value="20" oninput="updateMaxValue('speed', this.value)">
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 1)">+1</button>
@@ -125,188 +109,156 @@
           </div>
         </div>
       </div>
-
-    <!-- 행운, 지능, 주력 -->
-    <div class="row">
-      <!-- 행운 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label>행운:</label>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luck', 5)">+5</button>
+    </div>
+    
+  
+      <!-- 둘째 줄: 재능, 매력 -->
+      <div class="row mt-4">
+        <!-- 재능 -->
+        <div class="col-md-4">
+          <div class="stat">
+            <label>재능 (최대값 설정):</label>
+            <input type="number" class="form-control mb-2" id="talentMax" value="20" oninput="updateMaxValue('talent', this.value)">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', 5)">+5</button>
+            </div>
+            <span id="talentValue">0</span>
+            <div class="progress mt-2">
+              <div id="talentBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+            </div>
           </div>
-          <span id="luckValue">0</span>
-          <div class="progress mt-2">
-            <div id="luckBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+        </div>
+  
+        <!-- 매력 -->
+        <div class="col-md-4">
+          <div class="stat">
+            <label>매력 (최대값 설정):</label>
+            <input type="number" class="form-control mb-2" id="charmMax" value="20" oninput="updateMaxValue('charm', this.value)">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 5)">+5</button>
+            </div>
+            <span id="charmValue">0</span>
+            <div class="progress mt-2">
+              <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- 지능 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label>지능:</label>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('intelligence', 5)">+5</button>
-          </div>
-          <span id="intelligenceValue">0</span>
-          <div class="progress mt-2">
-            <div id="intelligenceBar" class="progress-bar" style="width: 0%; background-color: lightgreen;"></div>
-          </div>
-        </div>
+    </div>
+    <!-- 메인 스탯 사이의 입력 공간 -->
+    <div class="mt-4">
+        <label for="mainStatNote">스킬칸:</label>
+        <textarea id="mainStatNote" class="form-control" rows="3" placeholder="이곳에 내용을 작성하세요..."></textarea>
       </div>
-
-      <!-- 주력 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label>주력:</label>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('agi', 5)">+5</button>
-          </div>
-          <span id="agiValue">0</span>
-          <div class="progress mt-2">
-            <div id="agiBar" class="progress-bar" style="width: 0%; background-color: orange;"></div>
-          </div>
-        </div>
-      </div>
-
+    <!-- 추가 스탯 -->
     <h3 class="mt-5">추가 스탯</h3>
-    <div class="row">
-      <!-- 흑섬성공확률 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label>흑섬성공확률:</label>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button>
+    <div class="container">
+      <div class="row">
+        <!-- 공격력 -->
+        <div class="col-md-4">
+          <div class="stat">
+            <label>공격력:</label>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 5)">+5</button>
+            </div>
+            <span id="attackValue">0</span>
+            <div class="progress mt-2">
+              <div id="attackBar" class="progress-bar" style="width: 0%; background-color: darkred;"></div>
+            </div>
           </div>
-          <span id="blacksparkValue">0</span>
-          <div class="progress mt-2">
-            <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
-          </div>
-          <table id="blacksparkTable">
-            <thead>
-              <tr>
-                <th>어려움</th>
-                <th>매우어려움</th>
-                <th>극한</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="blacksparkHard">0</td>
-                <td id="blacksparkVeryHard">0</td>
-                <td id="blacksparkSveryHard">0</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-      </div>
-
-      <!-- 재능 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label>재능:</label>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('domain', 5)">+5</button>
-          </div>
-          <span id="domainValue">0</span>
-          <div class="progress mt-2">
-            <div id="domainBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+  
+        <!-- 방어력 -->
+        <div class="col-md-4">
+          <div class="stat">
+            <label>방어력:</label>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 5)">+5</button>
+            </div>
+            <span id="defenseValue">0</span>
+            <div class="progress mt-2">
+              <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: darkblue;"></div>
+            </div>
           </div>
         </div>
       </div>
-      
-  <!-- JavaScript -->
-  <script>
-    // 주사위 버튼 이벤트
-    document.getElementById('roll1to6Btn').addEventListener('click', function() {
-      const result = Math.floor(Math.random() * 6) + 1;
-      document.getElementById('roll1to6Result').textContent = "결과: " + result;
-    });
-    document.getElementById('roll1to9Btn').addEventListener('click', function() {
-      const result = Math.floor(Math.random() * 10) + 1;
-      document.getElementById('roll1to9Result').textContent = "결과: " + result;
-    });
-
-    document.getElementById('roll1to20Btn').addEventListener('click', function() {
-      const result = Math.floor(Math.random() * 20) + 1;
-      document.getElementById('roll1to20Result').textContent = "결과: " + result;
-    });
-
-    document.getElementById('roll1to100Btn').addEventListener('click', function() {
-      const result = Math.floor(Math.random() * 100) + 1;
-      document.getElementById('roll1to100Result').textContent = "결과: " + result;
-    });
-
-    // Stat limits
-    const maxValues = {
-      str: 20,
-      hp: 20,
-      speed: 20,
-      luck: 20,
-      intelligence: 20,
-      agi: 20,
-      extraAgi: 100,
-      idea: 20,
-      blackspark: 20,
-      domain: 20,
-      control:20,
-      feel:20,
-      understand:20
-    };
-
-    function adjustStat(stat, amount) {
-      const valueElement = document.getElementById(stat + 'Value');
-      let currentValue = parseInt(valueElement.textContent);
-
-      const newValue = Math.min(maxValues[stat], Math.max(0, currentValue + amount));
-      valueElement.textContent = newValue;
-
-      const progressBar = document.getElementById(stat + 'Bar');
-      progressBar.style.width = (newValue / maxValues[stat]) * 100 + '%';
-
-      // Update difficulty table
-      if (stat === 'blackspark') {
-        const hardValue = newValue;
-        const veryhardValue = Math.round(newValue / 2.5);
-        const sveryhardValue = Math.round(newValue / 5);
-
-        document.getElementById(stat + 'Hard').textContent = hardValue;
-        document.getElementById(stat + 'VeryHard').textContent = veryhardValue;
-        document.getElementById(stat + 'SveryHard').textContent = sveryhardValue;
+    </div>
+  
+    <!-- JavaScript -->
+    <script>
+      function updateTitle() {
+        const title = document.getElementById('siteTitle').value;
+        document.title = title;
+        document.getElementById('navbarTitle').textContent = title;
       }
-      else {
-          // 일반 스탯에 대한 쉬움, 보통, 어려움 계산
-          const easyValue = Math.round(newValue * 5);
-          const normalValue = Math.round(newValue * 2.5);
-          const hardValue = newValue;
-
-          document.getElementById(stat + 'Easy').textContent = easyValue;
-          document.getElementById(stat + 'Normal').textContent = normalValue;
-          document.getElementById(stat + 'Hard').textContent = hardValue;
+  
+      const maxValues = {
+        str: 20,
+        hp: 20,
+        speed: 20,
+        talent: 20,
+        charm: 20,
+        attack: 20,
+        defense: 20
+      };
+  
+      function updateMaxValue(stat, max) {
+        maxValues[stat] = parseInt(max) || 20; // 기본값 20
       }
-    }
-  </script>
-
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+  
+      function adjustStat(stat, amount) {
+        const valueElement = document.getElementById(stat + 'Value');
+        let currentValue = parseInt(valueElement.textContent);
+        const newValue = Math.min(maxValues[stat], Math.max(0, currentValue + amount));
+        valueElement.textContent = newValue;
+  
+        const progressBar = document.getElementById(stat + 'Bar');
+        progressBar.style.width = (newValue / maxValues[stat]) * 100 + '%';
+      }
+  
+      // 주사위 기능
+      document.getElementById('roll1to6Btn').addEventListener('click', function() {
+        const previous = document.getElementById('roll1to6Result').textContent;
+        const result = Math.floor(Math.random() * 6) + 1;
+        document.getElementById('roll1to6Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+      });
+  
+      document.getElementById('roll1to9Btn').addEventListener('click', function() {
+        const previous = document.getElementById('roll1to9Result').textContent;
+        const result = Math.floor(Math.random() * 10) + 1;
+        document.getElementById('roll1to9Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+      });
+  
+      document.getElementById('roll1to20Btn').addEventListener('click', function() {
+        const previous = document.getElementById('roll1to20Result').textContent;
+        const result = Math.floor(Math.random() * 20) + 1;
+        document.getElementById('roll1to20Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+      });
+  
+      document.getElementById('roll1to100Btn').addEventListener('click', function() {
+        const previous = document.getElementById('roll1to100Result').textContent;
+        const result = Math.floor(Math.random() * 100) + 1;
+        document.getElementById('roll1to100Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+      });
+    </script>
+  
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  </body>
+  </html>
+  
