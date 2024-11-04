@@ -148,9 +148,9 @@
               <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
             </div>
           </div>
-      <div class="col-md-4">curse
+      <div class="col-md-4">
           <div class="stat">
-            <label>재능 (최대값 설정):</label>
+            <label> 주력 (최대값 설정):</label>
             <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('talent', this.value)">
             <div class="btn-group">
               <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
