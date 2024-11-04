@@ -156,55 +156,63 @@
     <!-- 추가 스탯 -->
     <h3 class="mt-5">추가 스탯</h3>
     <div class="container">
-      <div class="row">
-        <!-- 공격력 -->
-        <div class="col-md-4">
-          <div class="stat">
-            <label>공격력:</label>
-            <div class="btn-group">
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -1)">-1</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 1)">+1</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -5)">-5</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 5)">+5</button>
+        <div class="row">
+            <!-- 공격력 -->
+            <div class="col-md-4">
+                <div class="stat">  
+                    <label>공격력 (최대값 설정):</label>
+                    <input type="number" class="form-control mb-2" id="attackMax" value="20" oninput="updateMaxValue('str', this.value)">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -1)">-1</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 1)">+1</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -5)">-5</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 5)">+5</button>
+                    </div>
+                    <span id="strValue">0</span>
+                    <div class="progress mt-2">
+                        <div id="attackBar" class="progress-bar" style="width: 0%; background-color: darkred;"></div>
+                    </div>
+                </div>
             </div>
-            <span id="attackValue">0</span>
-            <div class="progress mt-2">
-              <div id="attackBar" class="progress-bar" style="width: 0%; background-color: darkred;"></div>
+    
+            <!-- 방어력 -->
+            <div class="col-md-4">
+                <div class="stat">
+                    <label>방어력 (최대값 설정):</label>
+                    <input type="number" class="form-control mb-2" id="defenseMax" value="20" oninput="updateMaxValue('hp', this.value)">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -1)">-1</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 1)">+1</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -5)">-5</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 5)">+5</button>
+                    </div>
+                    <span id="defenseValue">0</span>
+                    <div class="progress mt-2">
+                        <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+                    </div>
+                </div>
             </div>
-          </div>
+    
+            <!-- 흑섬확률 -->
+            <div class="col-md-4">
+                <div class="stat">
+                    <label>흑섬확률 (최대값 설정):</label>
+                    <input type="number" class="form-control mb-2" id="blacksparkMax" value="20" oninput="updateMaxValue('speed', this.value)">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button>
+                        <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button>
+                    </div>
+                    <span id="blacksparkValue">0</span>
+                    <div class="progress mt-2">
+                        <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-  
-        <!-- 방어력 -->
-        <div class="col-md-4">
-          <div class="stat">
-            <label>방어력:</label>
-            <div class="btn-group">
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -1)">-1</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 1)">+1</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -5)">-5</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 5)">+5</button>
-            </div>
-            <span id="defenseValue">0</span>
-            <div class="progress mt-2">
-              <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: darkblue;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="stat">
-            <label>흑섬성공확률:</label>
-            <div class="btn-group">
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button>
-              <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button>
-            </div>
-            <span id="blacksparkValue">0</span>
-            <div class="progress mt-2">
-              <div id="blacksparkkBar" class="progress-bar" style="width: 0%; background-color: black;"></div>
-            </div>
-          </div>
-        </div>
+    </div>
+    
   
     <!-- JavaScript -->
     <script>
