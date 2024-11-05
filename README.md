@@ -272,6 +272,29 @@
       const progressBar = document.getElementById(stat + 'Bar');
       progressBar.style.width = (newValue / maxValues[stat]) * 100 + '%';
     }
+    document.getElementById('roll1to6Btn').addEventListener('click', function() {
+      const previous = document.getElementById('roll1to6Result').textContent;
+      const result = Math.floor(Math.random() * 6) + 1;
+      document.getElementById('roll1to6Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+    });
+
+    document.getElementById('roll1to9Btn').addEventListener('click', function() {
+      const previous = document.getElementById('roll1to9Result').textContent;
+      const result = Math.floor(Math.random() * 10) + 1;
+      document.getElementById('roll1to9Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+    });
+
+    document.getElementById('roll1to20Btn').addEventListener('click', function() {
+      const previous = document.getElementById('roll1to20Result').textContent;
+      const result = Math.floor(Math.random() * 20) + 1;
+      document.getElementById('roll1to20Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+    });
+
+    document.getElementById('roll1to100Btn').addEventListener('click', function() {
+      const previous = document.getElementById('roll1to100Result').textContent;
+      const result = Math.floor(Math.random() * 100) + 1;
+      document.getElementById('roll1to100Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+    });
   </script>
 </body>
 </html>
