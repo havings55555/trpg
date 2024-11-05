@@ -214,7 +214,7 @@
           </div>
           <span id="defenseValue">0</span>
           <div class="progress mt-2">
-            <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+            <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: darkblue;"></div>
           </div>
         </div>
       </div>
@@ -232,7 +232,7 @@
           </div>
           <span id="blacksparkValue">0</span>
           <div class="progress mt-2">
-            <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
+            <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: black;"></div>
           </div>
         </div>
       </div>
