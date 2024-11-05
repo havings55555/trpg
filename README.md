@@ -102,13 +102,13 @@
       <!-- 속도 -->
       <div class="col-md-4">
         <div class="stat">
-          <label class="stat-label">주력 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('curse', this.value)">
+          <label class="stat-label">속도 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('speed', this.value)">
           <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 5)">+5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 5)">+5</button>
           </div>
           <span id="speedValue">0</span>
           <div class="progress mt-2">
@@ -119,7 +119,7 @@
 
       <div class="container">
         <div class="row">
-          <!-- 힘 -->
+          <!-- 재능 -->
           <div class="col-md-4">
             <div class="stat">
               <label class="stat-label">재능 (최대값 설정):</label>
@@ -137,38 +137,38 @@
             </div>
           </div>
     
-          <!-- 체력 -->
+          <!-- 매력 -->
           <div class="col-md-4">
             <div class="stat">
               <label class="stat-label">매력 (최대값 설정):</label>
-              <input type="number" class="form-control mb-2" id="hpMax" value="20" oninput="MaxValue('hp', this.value)">
+              <input type="number" class="form-control mb-2" id="charmMax" value="20" oninput="MaxValue('charm', this.value)">
               <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('hp', 5)">+5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -1)">-1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 1)">+1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -5)">-5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 5)">+5</button>
               </div>
-              <span id="hpValue">0</span>
+              <span id="charmValue">0</span>
               <div class="progress mt-2">
-                <div id="hpBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+                <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
               </div>
             </div>
           </div>
     
-          <!-- 속도 -->
+          <!-- 주력 -->
           <div class="col-md-4">
             <div class="stat">
               <label class="stat-label">속도 (최대값 설정):</label>
-              <input type="number" class="form-control mb-2" id="speedMax" value="20" oninput="updateMaxValue('speed', this.value)">
+              <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('curse', this.value)">
               <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 5)">+5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 1)">+1</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -5)">-5</button>
+                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 5)">+5</button>
               </div>
-              <span id="speedValue">0</span>
+              <span id="curseValue">0</span>
               <div class="progress mt-2">
-                <div id="speedBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
+                <div id="curseBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
               </div>
             </div>
           </div>
