@@ -112,7 +112,7 @@
           </div>
           <span id="speedValue">0</span>
           <div class="progress mt-2">
-            <div id="speedBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+            <div id="speedBar" class="progress-bar" style="width: 0%; background-color: skyblue;"></div>
           </div>
         </div>
       </div>
