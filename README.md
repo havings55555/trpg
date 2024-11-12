@@ -158,7 +158,7 @@
           <!-- 주력 -->
           <div class="col-md-4">
             <div class="stat">
-              <label class="stat-label">속도 (최대값 설정):</label>
+              <label class="stat-label">주력 (최대값 설정):</label>
               <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('curse', this.value)">
               <div class="btn-group">
                 <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
@@ -172,6 +172,45 @@
               </div>
             </div>
           </div>
+          <!--세번째 스탯-->
+          <div class="container">
+            <div class="row">
+              <!-- 지능 -->
+              <div class="col-md-4">
+                <div class="stat">
+                  <label class="stat-label">지능 (최대값 설정):</label>
+                  <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
+                  <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
+                  </div>
+                  <span id="intValue">0</span>
+                  <div class="progress mt-2">
+                    <div id="intBar" class="progress-bar" style="width: 0%; background-color: yellow;"></div>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- 행운 -->
+              <div class="col-md-4">
+                <div class="stat">
+                  <label class="stat-label">행운 (최대값 설정):</label>
+                  <input type="number" class="form-control mb-2" id="lukMax" value="20" oninput="updateMaxValue('luk', this.value)">
+                  <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -1)">-1</button>
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 1)">+1</button>
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -5)">-5</button>
+                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 5)">+5</button>
+                  </div>
+                  <span id="lukValue">0</span>
+                  <div class="progress mt-2">
+                    <div id="lukBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+                  </div>
+                </div>
+              </div>
+        
     
 
     <!-- Text area between Main Stats and Additional Stats -->
@@ -256,7 +295,9 @@
       curse: 20,
       attack: 20,
       defense: 20,
-      blackspark: 20
+      blackspark: 20,
+      int:20,
+      luk:20
     };
 
     function updateMaxValue(stat, max) {
