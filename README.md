@@ -141,7 +141,7 @@
           <div class="col-md-4">
             <div class="stat">
               <label class="stat-label">매력 (최대값 설정):</label>
-              <input type="number" class="form-control mb-2" id="charmMax" value="20" oninput="MaxValue('charm', this.value)">
+              <input type="number" class="form-control mb-2" id="charmMax" value="20" oninput="updateMaxValue('charm', this.value)">
               <div class="btn-group">
                 <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -1)">-1</button>
                 <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 1)">+1</button>
