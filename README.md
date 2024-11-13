@@ -188,7 +188,7 @@
                   </div>
                   <span id="intValue">0</span>
                   <div class="progress mt-2">
-                    <div id="intBar" class="progress-bar" style="width: 0%; background-color: yellow;"></div>
+                    <div id="intBar" class="progress-bar" style="width: 0%; background-color: cornflowerblue;"></div>
                   </div>
                 </div>
               </div>
@@ -206,7 +206,7 @@
                   </div>
                   <span id="lukValue">0</span>
                   <div class="progress mt-2">
-                    <div id="lukBar" class="progress-bar" style="width: 0%; background-color: red;"></div>
+                    <div id="lukBar" class="progress-bar" style="width: 0%; background-color: greenyellow;"></div>
                   </div>
                 </div>
               </div>
