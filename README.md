@@ -26,14 +26,33 @@
     }
     .large-textarea {
       width: 500px;
-      height: 500px;
-      resize: none; /* Prevent resizing */
+      height: 500px !important;
+      resize:  none;
+    }
+    .dice-section {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .dice-settings {
+      display: flex;
+      align-items: center;
+    }
+    .dice-settings span {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .dice-settings input {
+      width: 80px;
+      margin-left: 5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Site title section -->
+  <!-- 사이트 제목 변경 -->
   <div class="mb-4">
     <label for="siteTitle">사이트 제목 변경:</label>
     <input type="text" id="siteTitle" class="form-control" placeholder="사이트 제목을 입력하세요" oninput="updateTitle()">
@@ -44,7 +63,7 @@
     <a class="navbar-brand" href="#" id="navbarTitle">TRPG 서버</a>
   </nav>
 
-  <!-- Random number buttons -->
+  <!-- 주사위 버튼 -->
   <div class="mt-4">
     <button id="roll1to6Btn" class="btn btn-primary mr-3">1 ~ 6 숫자 출력</button>
     <span id="roll1to6Result">결과: </span>
@@ -59,11 +78,23 @@
     <span id="roll1to100Result">결과: </span>
   </div>
 
-  <!-- Main stats section -->
+  <!-- 커스텀 주사위 설정 -->
+  <h3 class="mt-4">주사위 설정</h3>
+  <div class="dice-settings">
+    <span>1 ~</span>
+    <input type="number" id="diceMax" class="form-control" value="6" min="1" placeholder="최댓값 입력">
+  </div>
+  <button id="rollCustomDiceBtn" class="btn btn-primary mt-3">주사위 굴리기</button>
+  <div class="mt-3">
+    <span id="customDiceResult">결과: </span><br>
+    <span id="previousDiceResult">이전 결과: 없음</span>
+  </div>
+
+  <!-- 메인 스탯 -->
   <h3 class="mt-5">메인 스탯</h3>
   <div class="container">
+    <!-- 첫 번째 줄 -->
     <div class="row">
-      <!-- 힘 -->
       <div class="col-md-4">
         <div class="stat">
           <label class="stat-label">힘 (최대값 설정):</label>
@@ -80,8 +111,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 체력 -->
       <div class="col-md-4">
         <div class="stat">
           <label class="stat-label">체력 (최대값 설정):</label>
@@ -98,12 +127,10 @@
           </div>
         </div>
       </div>
-
-      <!-- 속도 -->
       <div class="col-md-4">
         <div class="stat">
           <label class="stat-label">속도 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('speed', this.value)">
+          <input type="number" class="form-control mb-2" id="speedMax" value="20" oninput="updateMaxValue('speed', this.value)">
           <div class="btn-group">
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', -1)">-1</button>
             <button class="btn btn-secondary btn-sm" onclick="adjustStat('speed', 1)">+1</button>
@@ -116,166 +143,102 @@
           </div>
         </div>
       </div>
-
-      <div class="container">
-        <div class="row">
-          <!-- 재능 -->
-          <div class="col-md-4">
-            <div class="stat">
-              <label class="stat-label">재능 (최대값 설정):</label>
-              <input type="number" class="form-control mb-2" id="talentMax" value="20" oninput="updateMaxValue('talent', this.value)">
-              <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', 5)">+5</button>
-              </div>
-              <span id="talentValue">0</span>
-              <div class="progress mt-2">
-                <div id="talentBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
-              </div>
-            </div>
-          </div>
-    
-          <!-- 매력 -->
-          <div class="col-md-4">
-            <div class="stat">
-              <label class="stat-label">매력 (최대값 설정):</label>
-              <input type="number" class="form-control mb-2" id="charmMax" value="20" oninput="updateMaxValue('charm', this.value)">
-              <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 5)">+5</button>
-              </div>
-              <span id="charmValue">0</span>
-              <div class="progress mt-2">
-                <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
-              </div>
-            </div>
-          </div>
-    
-          <!-- 주력 -->
-          <div class="col-md-4">
-            <div class="stat">
-              <label class="stat-label">주력 (최대값 설정):</label>
-              <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('curse', this.value)">
-              <div class="btn-group">
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 1)">+1</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -5)">-5</button>
-                <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 5)">+5</button>
-              </div>
-              <span id="curseValue">0</span>
-              <div class="progress mt-2">
-                <div id="curseBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
-              </div>
-            </div>
-          </div>
-          <!--세번째 스탯-->
-          <div class="container">
-            <div class="row">
-              <!-- 지능 -->
-              <div class="col-md-4">
-                <div class="stat">
-                  <label class="stat-label">지능 (최대값 설정):</label>
-                  <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
-                  <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
-                  </div>
-                  <span id="intValue">0</span>
-                  <div class="progress mt-2">
-                    <div id="intBar" class="progress-bar" style="width: 0%; background-color: cornflowerblue;"></div>
-                  </div>
-                </div>
-              </div>
-        
-              <!-- 행운 -->
-              <div class="col-md-4">
-                <div class="stat">
-                  <label class="stat-label">행운 (최대값 설정):</label>
-                  <input type="number" class="form-control mb-2" id="lukMax" value="20" oninput="updateMaxValue('luk', this.value)">
-                  <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -1)">-1</button>
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 1)">+1</button>
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -5)">-5</button>
-                    <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 5)">+5</button>
-                  </div>
-                  <span id="lukValue">0</span>
-                  <div class="progress mt-2">
-                    <div id="lukBar" class="progress-bar" style="width: 0%; background-color: greenyellow;"></div>
-                  </div>
-                </div>
-              </div>
-        
-    
-
-    <!-- Text area between Main Stats and Additional Stats -->
-    <div class="my-4">
-      <label for="mainStatNote">추가 정보 입력:</label>
-      <textarea id="mainStatNote" class="form-control large-textarea" placeholder="이곳에 내용을 작성하세요..."></textarea>
     </div>
+    <!-- 두 번째 줄 -->
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="stat">
+          <label class="stat-label">재능 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="talentMax" value="20" oninput="updateMaxValue('talent', this.value)">
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('talent', 5)">+5</button>
+          </div>
+          <span id="talentValue">0</span>
+          <div class="progress mt-2">
+            <div id="talentBar" class="progress-bar" style="width: 0%; background-color: purple;"></div>
+          </div>
         </div>
-    <!-- Additional stats section -->
-    <h3 class="mt-5">추가 스탯</h3>
+      </div>
+      <div class="col-md-4">
+        <div class="stat">
+          <label class="stat-label">매력 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="charmMax" value="20" oninput="updateMaxValue('charm', this.value)">
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('charm', 5)">+5</button>
+          </div>
+          <span id="charmValue">0</span>
+          <div class="progress mt-2">
+            <div id="charmBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat">
+          <label class="stat-label">지능 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
+          </div>
+          <span id="intValue">0</span>
+          <div class="progress mt-2">
+            <div id="intBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
     <div class="row">
-      <!-- 공격력 -->
+      <!-- 지능 -->
       <div class="col-md-4">
         <div class="stat">
-          <label class="stat-label">공격력 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="attackMax" value="20" oninput="updateMaxValue('attack', this.value)">
+          <label class="stat-label">지능 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
           <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('attack', 5)">+5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
           </div>
-          <span id="attackValue">0</span>
+          <span id="intValue">0</span>
           <div class="progress mt-2">
-            <div id="attackBar" class="progress-bar" style="width: 0%; background-color: darkred;"></div>
+            <div id="intBar" class="progress-bar" style="width: 0%; background-color: cornflowerblue;"></div>
           </div>
         </div>
       </div>
 
-      <!-- 방어력 -->
+      <!-- 행운 -->
       <div class="col-md-4">
         <div class="stat">
-          <label class="stat-label">방어력 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="defenseMax" value="20" oninput="updateMaxValue('defense', this.value)">
+          <label class="stat-label">행운 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="lukMax" value="20" oninput="updateMaxValue('luk', this.value)">
           <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('defense', 5)">+5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 5)">+5</button>
           </div>
-          <span id="defenseValue">0</span>
+          <span id="lukValue">0</span>
           <div class="progress mt-2">
-            <div id="defenseBar" class="progress-bar" style="width: 0%; background-color: darkblue;"></div>
+            <div id="lukBar" class="progress-bar" style="width: 0%; background-color: greenyellow;"></div>
           </div>
         </div>
       </div>
 
-      <!-- 흑섬확률 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label class="stat-label">흑섬확률 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="blacksparkMax" value="20" oninput="updateMaxValue('blackspark', this.value)">
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('blackspark', 5)">+5</button>
-          </div>
-          <span id="blacksparkValue">0</span>
-          <div class="progress mt-2">
-            <div id="blacksparkBar" class="progress-bar" style="width: 0%; background-color: black;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- 추가 정보 입력란 -->
+  <div class="my-4">
+    <label for="mainStatNote">추가 정보 입력:</label>
+    <textarea id="mainStatNote" class="form-control large-textarea" placeholder="이곳에 내용을 작성하세요..."></textarea>
   </div>
 
   <!-- Scripts -->
@@ -292,12 +255,10 @@
       speed: 20,
       talent: 20,
       charm: 20,
-      curse: 20,
+      int: 20,
       attack: 20,
       defense: 20,
       blackspark: 20,
-      int:20,
-      luk:20
     };
 
     function updateMaxValue(stat, max) {
@@ -313,28 +274,31 @@
       const progressBar = document.getElementById(stat + 'Bar');
       progressBar.style.width = (newValue / maxValues[stat]) * 100 + '%';
     }
-    document.getElementById('roll1to6Btn').addEventListener('click', function() {
-      const previous = document.getElementById('roll1to6Result').textContent;
-      const result = Math.floor(Math.random() * 6) + 1;
-      document.getElementById('roll1to6Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
-    });
 
-    document.getElementById('roll1to9Btn').addEventListener('click', function() {
-      const previous = document.getElementById('roll1to9Result').textContent;
-      const result = Math.floor(Math.random() * 10) + 1;
-      document.getElementById('roll1to9Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
-    });
+    function rollDice(max, resultId) {
+      const previous = document.getElementById(resultId).textContent.split(': ')[1] || '없음';
+      const result = Math.floor(Math.random() * max) + 1;
+      document.getElementById(resultId).textContent = `결과: ${result} (이전: ${previous})`;
+    }
 
-    document.getElementById('roll1to20Btn').addEventListener('click', function() {
-      const previous = document.getElementById('roll1to20Result').textContent;
-      const result = Math.floor(Math.random() * 20) + 1;
-      document.getElementById('roll1to20Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
-    });
+    document.getElementById('roll1to6Btn').addEventListener('click', () => rollDice(6, 'roll1to6Result'));
+    document.getElementById('roll1to9Btn').addEventListener('click', () => rollDice(10, 'roll1to9Result'));
+    document.getElementById('roll1to20Btn').addEventListener('click', () => rollDice(20, 'roll1to20Result'));
+    document.getElementById('roll1to100Btn').addEventListener('click', () => rollDice(100, 'roll1to100Result'));
 
-    document.getElementById('roll1to100Btn').addEventListener('click', function() {
-      const previous = document.getElementById('roll1to100Result').textContent;
-      const result = Math.floor(Math.random() * 100) + 1;
-      document.getElementById('roll1to100Result').textContent = `결과: ${result} (이전: ${previous.split(': ')[1] || '없음'})`;
+    let previousResult = "없음";
+    document.getElementById('rollCustomDiceBtn').addEventListener('click', function () {
+      const max = parseInt(document.getElementById('diceMax').value, 10);
+
+      if (isNaN(max) || max < 1) {
+        alert('올바른 최댓값을 입력하세요. (1 이상)');
+        return;
+      }
+
+      const result = Math.floor(Math.random() * max) + 1;
+      document.getElementById('customDiceResult').textContent = `결과: ${result}`;
+      document.getElementById('previousDiceResult').textContent = `이전 결과: ${previousResult}`;
+      previousResult = result;
     });
   </script>
 </body>
