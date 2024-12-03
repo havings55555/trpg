@@ -196,56 +196,58 @@
       </div>
     </div>
   </div>
-
-  <div class="container">
-    <div class="row">
+  <div class="row mt-3">
+    <div class="container">
+      <div class="row">
       <!-- 지능 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label class="stat-label">지능 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
-          </div>
-          <span id="intValue">0</span>
-          <div class="progress mt-2">
-            <div id="intBar" class="progress-bar" style="width: 0%; background-color: cornflowerblue;"></div>
+        <div class="col-md-4">
+          <div class="stat">
+            <label class="stat-label">지능 (최대값 설정):</label>
+            <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
+            </div>
+            <span id="intValue">0</span>
+            <div class="progress mt-2">
+              <div id="intBar" class="progress-bar" style="width: 0%; background-color: cornflowerblue;"></div>
+            </div>
           </div>
         </div>
-      </div>
 
       <!-- 행운 -->
-      <div class="col-md-4">
-        <div class="stat">
-          <label class="stat-label">행운 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="lukMax" value="20" oninput="updateMaxValue('luk', this.value)">
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 5)">+5</button>
-          </div>
-          <span id="lukValue">0</span>
-          <div class="progress mt-2">
-            <div id="lukBar" class="progress-bar" style="width: 0%; background-color: greenyellow;"></div>
+        <div class="col-md-4">
+          <div class="stat">
+            <label class="stat-label">행운 (최대값 설정):</label>
+            <input type="number" class="form-control mb-2" id="lukMax" value="20" oninput="updateMaxValue('luk', this.value)">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('luk', 5)">+5</button>
+            </div>
+            <span id="lukValue">0</span>
+            <div class="progress mt-2">
+              <div id="lukBar" class="progress-bar" style="width: 0%; background-color: greenyellow;"></div>
+            </div>
           </div>
         </div>
-      <div class="col-md-4">
-        <div class="stat">
-          <label class="stat-label">정신력 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="mindMax" value="20" oninput="updateMaxValue('mind', this.value)">
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', 5)">+5</button>
-          </div>
-          <span id="mindValue">0</span>
-          <div class="progress mt-2">
-            <div id="lukBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
+        <div class="col-md-4">
+          <div class="stat">
+            <label class="stat-label">정신력 (최대값 설정):</label>
+            <input type="number" class="form-control mb-2" id="mindMax" value="20" oninput="updateMaxValue('mind', this.value)">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', -1)">-1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', 1)">+1</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', -5)">-5</button>
+              <button class="btn btn-secondary btn-sm" onclick="adjustStat('mind', 5)">+5</button>
+            </div>
+            <span id="mindValue">0</span>
+            <div class="progress mt-2">
+              <div id="mindBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
+            </div>
           </div>
         </div>
       </div>
