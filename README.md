@@ -180,17 +180,17 @@
       </div>
       <div class="col-md-4">
         <div class="stat">
-          <label class="stat-label">지능 (최대값 설정):</label>
-          <input type="number" class="form-control mb-2" id="intMax" value="20" oninput="updateMaxValue('int', this.value)">
+          <label class="stat-label">주력 (최대값 설정):</label>
+          <input type="number" class="form-control mb-2" id="curseMax" value="20" oninput="updateMaxValue('curse', this.value)">
           <div class="btn-group">
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -1)">-1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 1)">+1</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', -5)">-5</button>
-            <button class="btn btn-secondary btn-sm" onclick="adjustStat('int', 5)">+5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -1)">-1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 1)">+1</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', -5)">-5</button>
+            <button class="btn btn-secondary btn-sm" onclick="adjustStat('curse', 5)">+5</button>
           </div>
-          <span id="intValue">0</span>
+          <span id="curseValue">0</span>
           <div class="progress mt-2">
-            <div id="intBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
+            <div id="curseBar" class="progress-bar" style="width: 0%; background-color: blue;"></div>
           </div>
         </div>
       </div>
@@ -272,10 +272,9 @@
       speed: 20,
       talent: 20,
       charm: 20,
+      curse:20,
       int: 20,
-      attack: 20,
-      defense: 20,
-      blackspark: 20,
+      luk:20,
       mind:20
     };
 
