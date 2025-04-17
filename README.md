@@ -249,7 +249,7 @@
             </div>
             <span id="mindValue">0</span>
             <div class="progress mt-2">
-              <div id="mindBar" class="progress-bar" style="width: 0%; background-color: pink;"></div>
+              <div id="mindBar" class="progress-bar" style="width: 0%; background-color: black;"></div>
             </div>
           </div>
         </div>
