@@ -79,16 +79,19 @@
   </div>
 
   <!-- 커스텀 주사위 설정 -->
-  <h3 class="mt-4">주사위 설정</h3>
-  <div class="dice-settings">
-    <span>1 ~</span>
-    <input type="number" id="diceMax" class="form-control" value="6" min="1" placeholder="최댓값 입력">
-  </div>
-  <button id="rollCustomDiceBtn" class="btn btn-primary mt-3">주사위 굴리기</button>
-  <div class="mt-3">
-    <span id="customDiceResult">결과: </span><br>
-    <span id="previousDiceResult">이전 결과: 없음</span>
-  </div>
+<h3 class="mt-4">주사위 설정</h3>
+<div class="dice-settings mb-2">
+  <span>최솟값:</span>
+  <input type="number" id="diceMin" class="form-control" value="1" min="1">
+  <span class="ml-3">최댓값:</span>
+  <input type="number" id="diceMax" class="form-control" value="6" min="1">
+</div>
+<button id="rollCustomDiceBtn" class="btn btn-primary mt-2">주사위 굴리기</button>
+<div class="mt-3">
+  <span id="customDiceResult">결과: </span><br>
+  <span id="previousDiceResult">이전 결과: 없음</span>
+</div>
+
 
   <!-- 메인 스탯 -->
   <h3 class="mt-5">메인 스탯</h3>
@@ -305,18 +308,20 @@
 
     let previousResult = "없음";
     document.getElementById('rollCustomDiceBtn').addEventListener('click', function () {
-      const max = parseInt(document.getElementById('diceMax').value, 10);
+  const min = parseInt(document.getElementById('diceMin').value, 10);
+  const max = parseInt(document.getElementById('diceMax').value, 10);
 
-      if (isNaN(max) || max < 1) {
-        alert('올바른 최댓값을 입력하세요. (1 이상)');
-        return;
-      }
+  if (isNaN(min) || isNaN(max) || min < 1 || max < min) {
+    alert('최솟값은 1 이상이고, 최댓값은 최솟값보다 커야 합니다.');
+    return;
+  }
 
-      const result = Math.floor(Math.random() * max) + 1;
-      document.getElementById('customDiceResult').textContent = `결과: ${result}`;
-      document.getElementById('previousDiceResult').textContent = `이전 결과: ${previousResult}`;
-      previousResult = result;
-    });
+  const result = Math.floor(Math.random() * (max - min + 1)) + min;
+  document.getElementById('customDiceResult').textContent = `결과: ${result}`;
+  document.getElementById('previousDiceResult').textContent = `이전 결과: ${previousResult}`;
+  previousResult = result;
+});
+
   </script>
 </body>
 </html>
